@@ -32,7 +32,7 @@ namespace FasterGameLoading
         public static bool doNotDelayHarmonyPatches = true;
         public static bool DelayHarmonyPatchAll(Harmony __instance, Assembly assembly)
         {
-            if (doNotDelayHarmonyPatches || assembly.GetName().Name == "CombatAI") return true;
+            if (doNotDelayHarmonyPatches || assembly.GetName().Name == "CombatAI" || assembly.GetName().Name == "CombatExtended.ExtendedLoadout" ) return true;
             FasterGameLoadingMod.delayedActions.harmonyPatchesToPerform.Add((__instance, assembly));
             return false;
         }
