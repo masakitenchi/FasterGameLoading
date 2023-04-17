@@ -11,6 +11,19 @@ namespace FasterGameLoading
     [HarmonyPatch]
     public static class Startup
     {
+        public static readonly string[] AllExceptionMods = { 
+            "CombatAI",
+            "CombatExtended.ExtendedLoadout",
+            "LunarLoader",
+            "LunarFramework",
+            "MapPreview",
+            "MapPreviewMod",
+            "GeologicalLandforms",
+            "GeologicalLandformsMod",
+            "TerrainGraph",
+            "ArchitectSense"
+        };
+
         [HarmonyTargetMethod]
         public static MethodBase TargetMethod()
         {
@@ -32,7 +45,7 @@ namespace FasterGameLoading
         public static bool doNotDelayHarmonyPatches = true;
         public static bool DelayHarmonyPatchAll(Harmony __instance, Assembly assembly)
         {
-            if (doNotDelayHarmonyPatches || assembly.GetName().Name == "CombatAI" || assembly.GetName().Name == "CombatExtended.ExtendedLoadout" ) return true;
+            if (doNotDelayHarmonyPatches || AllExceptionMods.Contains(assembly.GetName().Name)) return true;
             FasterGameLoadingMod.delayedActions.harmonyPatchesToPerform.Add((__instance, assembly));
             return false;
         }

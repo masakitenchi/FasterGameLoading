@@ -65,8 +65,8 @@ namespace FasterGameLoading
                 }
             }
             Startup.doNotDelayLongEventsWhenFinished = true;
+            Log.Warning($"Finished {count} actions - " + DateTime.Now.ToString());
             count = 0;
-            Log.Warning("Finished actions - " + DateTime.Now.ToString());
             Log.Warning("Starting performing harmony patches: " + harmonyPatchesToPerform.Count + " - " + DateTime.Now.ToString());
             while (harmonyPatchesToPerform.Any())
             {
@@ -105,8 +105,8 @@ namespace FasterGameLoading
                 }
             }
             Startup.doNotDelayHarmonyPatches = true;
+            Log.Warning($"Finished performing {count} harmony patches: " + DateTime.Now.ToString());
             count = 0;
-            Log.Warning("Finished performing harmony patches: " + DateTime.Now.ToString());
             Log.Warning("Starting loading graphics: " + graphicsToLoad.Count + " - " + DateTime.Now.ToString());
             while (graphicsToLoad.Any())
             {
@@ -138,8 +138,8 @@ namespace FasterGameLoading
                 }
             }
 
-            count = 0; 
-            Log.Warning("Finished loading graphics - " + DateTime.Now.ToString());
+            Log.Warning($"Finished loading {count} graphics - " + DateTime.Now.ToString());
+            count = 0;
             Log.Warning("Starting loading icons: " + iconsToLoad.Count + " - " + DateTime.Now.ToString());
             while (iconsToLoad.Any())
             {
@@ -169,7 +169,7 @@ namespace FasterGameLoading
                 }
             }
             stopwatch.Stop();
-            Log.Warning("Finished loading icons - " + DateTime.Now.ToString());
+            Log.Warning($"Finished loading {count} icons - " + DateTime.Now.ToString());
             this.enabled = false;
             yield return null;
         }
