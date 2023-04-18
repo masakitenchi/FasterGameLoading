@@ -22,7 +22,6 @@ public static class Patch_ArchitectSense
 
     public static void LoadAfterInit()
     {
-        Log.Message("Initializing Architect Sense...");
         new Controller(_contentPack).Initialize();
     }
 }
