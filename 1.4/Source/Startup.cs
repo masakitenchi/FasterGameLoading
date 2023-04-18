@@ -11,7 +11,7 @@ namespace FasterGameLoading
     [HarmonyPatch]
     public static class Startup
     {
-        public static readonly string[] AllExceptionMods = { 
+        public static readonly string[] AllExceptionMods = {
             "CombatAI",
             "CombatExtended.ExtendedLoadout",
             "LunarLoader",

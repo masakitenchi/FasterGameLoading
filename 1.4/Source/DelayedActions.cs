@@ -44,6 +44,7 @@ namespace FasterGameLoading
             {
                 if (UnityData.IsInMainThread is false)
                 {
+                    Log.ErrorOnce("Trying to perform delayed actions in other thread.", Gen.HashCombineInt(Rand.Int, 65536));
                     yield return 0;
                 }
                 var action = actionsToPerform.PopFirst();
@@ -59,7 +60,8 @@ namespace FasterGameLoading
                 float elapsed = (float)stopwatch.ElapsedTicks / Stopwatch.Frequency;
                 if (elapsed >= MaxImpactThisFrame)
                 {
-                    count = 0;
+                    //Log.Warning("Stopwatch is being reset due to elapsed >= MaxImpactThisFrame");
+                    //count = 0;
                     yield return 0;
                     stopwatch.Restart();
                 }
@@ -67,7 +69,7 @@ namespace FasterGameLoading
             Startup.doNotDelayLongEventsWhenFinished = true;
             Log.Warning($"Finished {count} actions - " + DateTime.Now.ToString());
             count = 0;
-            Log.Warning("Starting performing harmony patches: " + harmonyPatchesToPerform.Count + " - " + DateTime.Now.ToString());
+            Log.Warning("Starting performing harmony patches in " + harmonyPatchesToPerform.Count + " Assemblies: - " + DateTime.Now.ToString());
             while (harmonyPatchesToPerform.Any())
             {
                 if (curTypes is null || !curTypes.Any())
@@ -79,6 +81,7 @@ namespace FasterGameLoading
                 }
                 if (UnityData.IsInMainThread is false)
                 {
+                    Log.ErrorOnce("Trying to perform harmony patches in other thread.", Gen.HashCombineInt(Rand.Int, 32767));
                     yield return 0;
                 }
 
@@ -99,7 +102,8 @@ namespace FasterGameLoading
                 float elapsed = (float)stopwatch.ElapsedTicks / Stopwatch.Frequency;
                 if (elapsed >= MaxImpactThisFrame)
                 {
-                    count = 0;
+                    //Log.Warning("Stopwatch is being reset due to elapsed >= MaxImpactThisFrame");
+                    //count = 0;
                     yield return 0;
                     stopwatch.Restart();
                 }
@@ -112,6 +116,7 @@ namespace FasterGameLoading
             {
                 if (UnityData.IsInMainThread is false)
                 {
+                    Log.ErrorOnce("Trying to perform delayed actions in other thread.", Gen.HashCombineInt(Rand.Int, 1024));
                     yield return 0;
                 }
                 var (def, action) = graphicsToLoad.PopFirst();
@@ -127,7 +132,8 @@ namespace FasterGameLoading
                 float elapsed = (float)stopwatch.ElapsedTicks / Stopwatch.Frequency;
                 if (elapsed >= MaxImpactThisFrame)
                 {
-                    count = 0;
+                    //Log.Warning("Stopwatch is being reset due to elapsed >= MaxImpactThisFrame");
+                    //count = 0;
                     yield return 0;
                     stopwatch.Restart();
                 }
@@ -145,6 +151,7 @@ namespace FasterGameLoading
             {
                 if (UnityData.IsInMainThread is false)
                 {
+                    Log.ErrorOnce("Trying to perform delayed actions in other thread.", Gen.HashCombineInt(Rand.Int, 2048));
                     yield return 0;
                 }
                 var (def, action) = iconsToLoad.PopFirst();
@@ -162,7 +169,8 @@ namespace FasterGameLoading
                     float elapsed = (float)stopwatch.ElapsedTicks / Stopwatch.Frequency;
                     if (elapsed >= MaxImpactThisFrame)
                     {
-                        count = 0;
+                        //Log.Warning("Stopwatch is being reset due to elapsed >= MaxImpactThisFrame");
+                        //count = 0;
                         yield return 0;
                         stopwatch.Restart();
                     }
