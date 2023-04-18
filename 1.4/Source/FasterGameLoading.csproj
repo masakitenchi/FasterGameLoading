@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ArchitectSense">
+      <HintPath>..\..\..\Core_SK\Assemblies\ArchitectSense.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -64,6 +68,7 @@
     <Compile Include="DelayedActions.cs" />
     <Compile Include="FasterGameLoadingSettings.cs" />
     <Compile Include="MemoryUtility_ClearAllMapsAndWorld_Patch.cs" />
+    <Compile Include="Misc\ArchitectSense.cs" />
     <Compile Include="Misc\DisableLogObsoleteMethodPatchErrors.cs" />
     <Compile Include="Misc\GlobalTextureAtlasManager_BakeStaticAtlases_Patch.cs" />
     <Compile Include="Misc\GlobalTextureAtlasManager_TryInsertStatic_Patch.cs" />

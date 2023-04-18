@@ -20,8 +20,7 @@ namespace FasterGameLoading
             "MapPreviewMod",
             "GeologicalLandforms",
             "GeologicalLandformsMod",
-            "TerrainGraph",
-            "ArchitectSense"
+            "TerrainGraph"
         };
 
         [HarmonyTargetMethod]
