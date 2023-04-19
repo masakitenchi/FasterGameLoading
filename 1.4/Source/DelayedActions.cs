@@ -179,8 +179,11 @@ namespace FasterGameLoading
             stopwatch.Stop();
             Log.Warning($"Finished loading {count} icons - " + DateTime.Now.ToString());
             this.enabled = false;
-            Log.Warning("Initializing Architect Sense...");
-            Patch_ArchitectSense.LoadAfterInit();
+            if (FasterGameLoadingSettings.delayArchitectSenseLoading)
+            {
+                Log.Warning("Initializing Architect Sense...");
+                Patch_ArchitectSense.LoadAfterInit();
+            }
             yield return null;
         }
 

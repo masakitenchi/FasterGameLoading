@@ -16,8 +16,12 @@ public static class Patch_ArchitectSense
     public static bool Prefix(ModContentPack content)
     {
         //_instance = __instance;
-        _contentPack = content;
-        return false;
+        if(FasterGameLoadingSettings.delayArchitectSenseLoading)
+        {
+            _contentPack = content;
+            return false;
+        }
+        return true;
     }
 
     public static void LoadAfterInit()

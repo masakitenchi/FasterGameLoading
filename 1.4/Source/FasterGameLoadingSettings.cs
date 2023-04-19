@@ -14,6 +14,7 @@ namespace FasterGameLoading
         public static List<string> modsInLastSession = new List<string>();
         public static HashSet<string> successfulXMLPathesSinceLastSession = new HashSet<string>();
         public static HashSet<string> failedXMLPathesSinceLastSession = new HashSet<string>();
+        public static bool delayArchitectSenseLoading = true;
         public static bool delayLongEventActionsLoading = true;
         public static bool delayHarmonyPatchesLoading = true;
         public static bool delayGraphicLoading = true;
@@ -34,6 +35,7 @@ namespace FasterGameLoading
         {
             var ls = new Listing_Standard();
             ls.Begin(new Rect(inRect.x, inRect.y, inRect.width, 500));
+            ls.CheckboxLabeled("Delay Architect Sense from loading before all delayed actions are finished. Enables this with long event <b>and</b> graphic delay could further speed up loading, but seems to remove all \"Build Copy\" Commands. Use at your own risk.", ref delayArchitectSenseLoading);
             ls.CheckboxLabeled("Load mod content early during game idling periods. When enabled, the game might become not responsive during loading, but it's expected. Disable this if you will encounter any issues.", ref earlyModContentLoading);
             ls.CheckboxLabeled("Prevent long event loading during startup and load them gradually during playing. Will cut some time off during loading, however it might be not stable and error prone. Disable this if you will encounter any issues.", ref delayLongEventActionsLoading);
             ls.CheckboxLabeled("Prevent harmony patches loading during startup and load them gradually during playing. Will cut some time off during loading, however it might be not stable and error prone. Disable this if you will encounter any issues.", ref delayHarmonyPatchesLoading);
@@ -84,6 +86,7 @@ namespace FasterGameLoading
             Scribe_Collections.Look(ref successfulXMLPathesSinceLastSession, "successfulXMLPathesSinceLastSession", LookMode.Value);
             Scribe_Collections.Look(ref failedXMLPathesSinceLastSession, "failedXMLPathesSinceLastSession", LookMode.Value);
             Scribe_Collections.Look(ref modsInLastSession, "modsInLastSession", LookMode.Value);
+            Scribe_Values.Look(ref delayArchitectSenseLoading, "delayArchitectSenseLoading", true);
             Scribe_Values.Look(ref disableStaticAtlasesBaking, "disableStaticAtlasesBaking");
             Scribe_Values.Look(ref delayGraphicLoading, "delayGraphicLoading", true);
             Scribe_Values.Look(ref delayLongEventActionsLoading, "delayLongEventActionsLoading", true);
