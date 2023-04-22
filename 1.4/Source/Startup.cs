@@ -24,7 +24,7 @@ namespace FasterGameLoading
             "TerrainGraph"
         };
 
-        public static StringBuilder sb = new StringBuilder("Delaying these LongEvent:\n");
+        //public static StringBuilder sb = new StringBuilder("Delaying these LongEvent:\n");
 
         [HarmonyTargetMethod]
         public static MethodBase TargetMethod()
@@ -59,7 +59,7 @@ namespace FasterGameLoading
             if (doNotDelayLongEventsWhenFinished) return true;
             if (action.Method.Name.Contains("DoPlayLoad") is false && action.Method.DeclaringType.Assembly == typeof(Game).Assembly)
             {
-                sb.AppendLine($"{action.Method.DeclaringType} {action.Method.Name}");
+                //sb.AppendLine($"{action.Method.DeclaringType} {action.Method.Name}");
                 FasterGameLoadingMod.delayedActions.actionsToPerform.Add(action);
                 return false;
             }
@@ -80,7 +80,7 @@ namespace FasterGameLoading
             {
                 FasterGameLoadingMod.delayedActions.StartCoroutine(FasterGameLoadingMod.delayedActions.PerformActions());
             });
-            Log.Message(sb.ToString());
+            //Log.Message(sb.ToString());
         }
     }
 }
