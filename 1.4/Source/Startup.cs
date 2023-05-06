@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -23,6 +24,8 @@ namespace FasterGameLoading
             "TerrainGraph",
             "PrepareLanding"
         };
+
+        //public static StringBuilder sb = new StringBuilder("Delaying these LongEvent:\n");
 
         [HarmonyTargetMethod]
         public static MethodBase TargetMethod()
@@ -46,6 +49,7 @@ namespace FasterGameLoading
         public static bool DelayHarmonyPatchAll(Harmony __instance, Assembly assembly)
         {
             if (doNotDelayHarmonyPatches || AllExceptionMods.Contains(assembly.GetName().Name)) return true;
+            //Log.Message($"Delaying {assembly.FullName}'s harmony patches");
             FasterGameLoadingMod.delayedActions.harmonyPatchesToPerform.Add((__instance, assembly));
             return false;
         }
@@ -56,6 +60,7 @@ namespace FasterGameLoading
             if (doNotDelayLongEventsWhenFinished) return true;
             if (action.Method.Name.Contains("DoPlayLoad") is false && action.Method.DeclaringType.Assembly == typeof(Game).Assembly)
             {
+                //sb.AppendLine($"{action.Method.DeclaringType} {action.Method.Name}");
                 FasterGameLoadingMod.delayedActions.actionsToPerform.Add(action);
                 return false;
             }
@@ -76,6 +81,7 @@ namespace FasterGameLoading
             {
                 FasterGameLoadingMod.delayedActions.StartCoroutine(FasterGameLoadingMod.delayedActions.PerformActions());
             });
+            //Log.Message(sb.ToString());
         }
     }
 }
