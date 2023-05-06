@@ -9,14 +9,13 @@ namespace FasterGameLoading;
 [HarmonyPatch]
 public static class Patch_ArchitectSense
 {
-    private static Controller _instance;
     private static ModContentPack _contentPack;
     [HarmonyPrefix]
-    [HarmonyPatch(typeof(Controller), MethodType.Constructor, new Type[] {typeof(ModContentPack)})]
+    [HarmonyPatch(typeof(Controller), MethodType.Constructor, new Type[] { typeof(ModContentPack) })]
     public static bool Prefix(ModContentPack content)
     {
         //_instance = __instance;
-        if(FasterGameLoadingSettings.delayArchitectSenseLoading)
+        if (FasterGameLoadingSettings.delayArchitectSenseLoading)
         {
             _contentPack = content;
             return false;

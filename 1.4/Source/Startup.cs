@@ -22,7 +22,8 @@ namespace FasterGameLoading
             "GeologicalLandforms",
             "GeologicalLandformsMod",
             "TerrainGraph",
-            "PrepareLanding"
+            "PrepareLanding",
+            "ArchitectSense"
         };
 
         //public static StringBuilder sb = new StringBuilder("Delaying these LongEvent:\n");

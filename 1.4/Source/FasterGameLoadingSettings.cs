@@ -35,7 +35,7 @@ namespace FasterGameLoading
         {
             var ls = new Listing_Standard();
             ls.Begin(new Rect(inRect.x, inRect.y, inRect.width, 500));
-            ls.CheckboxLabeled("Delay Architect Sense from loading before all delayed actions are finished. Enables this with long event <b>and</b> graphic delay could further speed up loading, but seems to remove all \"Build Copy\" Commands. Use at your own risk.", ref delayArchitectSenseLoading);
+            ls.CheckboxLabeled("Delay Architect Sense from loading until icons and textures are loaded. Enables this with long event <b>and</b> graphic delay could further speed up loading.", ref delayArchitectSenseLoading);
             ls.CheckboxLabeled("Load mod content early during game idling periods. When enabled, the game might become not responsive during loading, but it's expected. Disable this if you will encounter any issues.", ref earlyModContentLoading);
             ls.CheckboxLabeled("Prevent long event loading during startup and load them gradually during playing. Will cut some time off during loading, however it might be not stable and error prone. Disable this if you will encounter any issues.", ref delayLongEventActionsLoading);
             ls.CheckboxLabeled("Prevent harmony patches loading during startup and load them gradually during playing. Will cut some time off during loading, however it might be not stable and error prone. Disable this if you will encounter any issues.", ref delayHarmonyPatchesLoading);
