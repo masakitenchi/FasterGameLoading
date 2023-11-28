@@ -4,13 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Verse;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading
 {
     [HarmonyPatch(typeof(BuildableDef), "PostLoad")]
     public static class BuildableDef_PostLoad_Patch
     {
-        public static bool Prepare() => FasterGameLoadingSettings.delayGraphicLoading;
+        public static bool Prepare()
+        {
+            Log.Message($"Patching BuildableDef.PostLoad: {!FishActive}");
+            return !FishActive && FasterGameLoadingSettings.delayGraphicLoading;
+        }
+
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> codeInstructions)
         {
             var execute = AccessTools.Method(typeof(LongEventHandler), nameof(LongEventHandler.ExecuteWhenFinished));
@@ -28,7 +34,7 @@ namespace FasterGameLoading
                 }
             }
         }
-    
+
         public static void ExecuteDelayed(Action action, BuildableDef def)
         {
             if (def is ThingDef thingDef && thingDef.ShouldBeLoadedImmediately())
@@ -46,9 +52,9 @@ namespace FasterGameLoading
 
         public static bool ShouldBeLoadedImmediately(this ThingDef thingDef)
         {
-            return thingDef.graphicData != null && thingDef.graphicData.Linked 
+            return thingDef.graphicData != null && thingDef.graphicData.Linked
                 || thingDef.thingClass != null && thingDef.thingClass.Name == "Building_Pipe"
-                || typeof(Medicine).IsAssignableFrom(thingDef.thingClass) 
+                || typeof(Medicine).IsAssignableFrom(thingDef.thingClass)
                 || thingDef.orderedTakeGroup?.defName == "Medicine";
         }
     }

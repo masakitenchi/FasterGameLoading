@@ -12,6 +12,7 @@ namespace FasterGameLoading
         public static FasterGameLoadingSettings settings;
         public static Thread threadPostLoad;
         public static DelayedActions delayedActions;
+        public static readonly bool FishActive = !ModsConfig.IsActive("bs.performance");
         public FasterGameLoadingMod(ModContentPack pack) : base(pack)
         {
             var gameObject = new GameObject("FasterGameLoadingMod");
@@ -20,7 +21,7 @@ namespace FasterGameLoading
             settings = this.GetSettings<FasterGameLoadingSettings>();
             harmony = new Harmony("FasterGameLoadingMod");
             harmony.PatchAll();
-            if (FasterGameLoadingSettings.delayLongEventActionsLoading)
+            if (!FishActive && FasterGameLoadingSettings.delayLongEventActionsLoading)
             {
                 harmony.Patch(AccessTools.DeclaredMethod(typeof(LongEventHandler), nameof(LongEventHandler.ExecuteWhenFinished)),
                     prefix: new HarmonyMethod(AccessTools.Method(typeof(Startup), nameof(Startup.DelayExecuteWhenFinished))));

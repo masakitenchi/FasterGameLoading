@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Verse;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading
 {
@@ -13,6 +14,14 @@ namespace FasterGameLoading
     {
         public static Dictionary<string, string> loadedTexturesThisSession = new Dictionary<string, string>();
         public static Dictionary<string, Texture2D> savedTextures = new Dictionary<string, Texture2D>();
+
+
+        public static bool Prepare()
+        {
+            if (FishActive) return false;
+            return true;
+        }
+
         public static bool Prefix(VirtualFile file, out bool __state, ref Texture2D __result)
         {
             var fullPath = file.FullPath;

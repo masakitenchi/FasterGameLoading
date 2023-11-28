@@ -6,13 +6,19 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Verse;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading
 {
     [HarmonyPatch(typeof(ThingDef), "PostLoad")]
     public static class ThingDef_PostLoad_Patch
     {
-        public static bool Prepare() => FasterGameLoadingSettings.delayGraphicLoading;
+        public static bool Prepare()
+        {
+            Log.Message($"Patching ThingDef.PostLoad: {!FishActive}");
+            return !FishActive && FasterGameLoadingSettings.delayGraphicLoading;
+        }
+
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> codeInstructions)
         {
             var execute = AccessTools.Method(typeof(LongEventHandler), nameof(LongEventHandler.ExecuteWhenFinished));

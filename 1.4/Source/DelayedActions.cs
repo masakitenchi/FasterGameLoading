@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using Verse;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading
 {
@@ -179,7 +180,7 @@ namespace FasterGameLoading
             stopwatch.Stop();
             Log.Warning($"Finished loading {count} icons - " + DateTime.Now.ToString());
             this.enabled = false;
-            if (FasterGameLoadingSettings.delayArchitectSenseLoading)
+            if (!FishActive && FasterGameLoadingSettings.delayArchitectSenseLoading)
             {
                 Log.Warning("Initializing Architect Sense...");
                 Patch_ArchitectSense.LoadAfterInit();

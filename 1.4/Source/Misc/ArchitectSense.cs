@@ -3,6 +3,7 @@ using ArchitectSense;
 using HarmonyLib;
 using Verse;
 using System;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading;
 
@@ -10,6 +11,9 @@ namespace FasterGameLoading;
 public static class Patch_ArchitectSense
 {
     private static ModContentPack _contentPack;
+
+    public static bool Prepare() => !FishActive;
+
     [HarmonyPrefix]
     [HarmonyPatch(typeof(Controller), MethodType.Constructor, new Type[] { typeof(ModContentPack) })]
     public static bool Prefix(ModContentPack content)

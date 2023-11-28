@@ -2,6 +2,7 @@
 using System;
 using System.Reflection;
 using Verse;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading
 {
@@ -9,7 +10,7 @@ namespace FasterGameLoading
     public static class RedirectHugslibToMainThread
     {
         public static MethodBase targetMethod = AccessTools.Method("HugsLib.HugsLibController:OnDefsLoaded");
-        public static bool Prepare() => (FasterGameLoadingSettings.delayGraphicLoading || FasterGameLoadingSettings.delayLongEventActionsLoading)
+        public static bool Prepare() => !FishActive && (FasterGameLoadingSettings.delayGraphicLoading || FasterGameLoadingSettings.delayLongEventActionsLoading)
             && targetMethod != null;
         public static MethodBase TargetMethod() => targetMethod;
 

@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
 using Verse;
+using static FasterGameLoading.FasterGameLoadingMod;
 
 namespace FasterGameLoading
 {
@@ -8,6 +9,13 @@ namespace FasterGameLoading
     public static class GraphicData_Init_Patch
     {
         public static Dictionary<string, List<GraphicData>> savedGraphics = new Dictionary<string, List<GraphicData>>();
+
+
+        public static bool Prepare()
+        {
+            if(FishActive) return false;
+            return true;
+        }
         public static bool Prefix(GraphicData __instance)
         {
             if (__instance.texPath.NullOrEmpty() is false)
